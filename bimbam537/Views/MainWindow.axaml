@@ -7,7 +7,9 @@
         x:Class="bimbam537.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="bimbam537">
+        Title="bimbam537"
+        MinHeight="320"
+        MinWidth="640">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -16,37 +18,38 @@
     </Design.DataContext>
     
     <Grid RowDefinitions="*, Auto" ColumnDefinitions="Auto, *" Background="Aquamarine">
-        <Grid Grid.Column="0" Grid.Row="0" Background="Azure" Width="135" RowDefinitions="*, *, *, *">
-            <Button Background="Aqua" VerticalAlignment="Stretch" Grid.Row="0" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+        <Grid x:Name="TabsGrid" Grid.Column="0" Grid.Row="0" Background="Azure" Width="135" RowDefinitions="*, *, *, *">
+            
+            <Button BorderThickness="5" x:Name="table1Button" Background="Aqua" VerticalAlignment="Stretch" Grid.Row="0" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">клиенты</TextBlock>
             </Button>
-            <Button Background="Aqua" VerticalAlignment="Stretch" Grid.Row="1" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+            <Button BorderThickness="5" x:Name="table2Button" Background="Aqua" VerticalAlignment="Stretch" Grid.Row="1" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">заказы</TextBlock>
             </Button>
-            <Button Background="Aqua" VerticalAlignment="Stretch" Grid.Row="2" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+            <Button BorderThickness="5" x:Name="table3Button" Background="Aqua" VerticalAlignment="Stretch" Grid.Row="2" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">говно1</TextBlock>
             </Button>
-            <Button Background="Aqua" VerticalAlignment="Stretch" Grid.Row="3" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+            <Button BorderThickness="5" x:Name="table4Button" Background="Aqua" VerticalAlignment="Stretch" Grid.Row="3" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">говно2</TextBlock>
             </Button>
         </Grid>
         <Grid Grid.Row="0" Column="1" RowDefinitions="Auto, *" Background="Beige">
-            <Grid Grid.Row="0" Height="80" ColumnDefinitions="*, *, *, *"  Background="Chartreuse">
-                <Button Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
+            <Grid x:Name="FunctionsGrid" Grid.Row="0" Height="50" ColumnDefinitions="*, *, *, *"  Background="Chartreuse">
+                <Button x:Name="addButton" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">Добавить</TextBlock>
                 </Button>
-                <Button Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
+                <Button x:Name="changeButton" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">Редактировать</TextBlock>
                 </Button>
-                <Button Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
+                <Button x:Name="deleteButton" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">Удалить</TextBlock>
                 </Button>
-                <Button Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="80" Margin="0,5, 5, 5">
+                <Button x:Name="themeButton" Click="ThemeChanger" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="80" Margin="0,5, 5, 5">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">тема</TextBlock>
                 </Button>
             </Grid>
-            <Grid Grid.Row="1"  Background="Beige">
-                <DataGrid GridLinesVisibility="All" HorizontalGridLinesBrush="Azure" VerticalGridLinesBrush="Azure" AutoGenerateColumns="True" x:CompileBindings="True" ItemsSource="{Binding asd}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Chocolate" Margin="5, 10, 5, 10">
+            <Grid x:Name="DataGridPanel" Grid.Row="1"  Background="Beige">
+                <DataGrid x:Name="DataGrid" GridLinesVisibility="All" HorizontalGridLinesBrush="Azure" VerticalGridLinesBrush="Azure" AutoGenerateColumns="True" x:CompileBindings="True" ItemsSource="{Binding asd}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Chocolate" Margin="5, 10, 5, 10">
                 </DataGrid>
             </Grid>
         </Grid>
