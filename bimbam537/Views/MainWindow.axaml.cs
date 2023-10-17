@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Controls.Templates;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Styling;
@@ -91,8 +93,19 @@ public void UpdateTables(object? sender, RoutedEventArgs e)
                 table2Button.BorderBrush = Brushes.Transparent;
                 table3Button.BorderBrush = Brushes.Transparent;
                 table4Button.BorderBrush = Brushes.Transparent;
-                
+
                 dataGrid.ItemsSource = MainWindowViewModel.requests;
+                var col = new DataGridTemplateColumn();
+                col.Header = "Ответственные";
+                col.CellTemplate = new FuncDataTemplate<Object>((itemModel, nameScope) =>
+                {
+                    return new Avalonia.Controls.ComboBox
+                    {
+                        SelectedIndex = 0
+                    };
+                });
+                
+                dataGrid.Columns.Add(col);
                 break;
             case 1:
                 table1Button.BorderBrush = Brushes.Transparent;

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Security.Policy;
+using bimbam537.ViewModels;
 using Microsoft.CodeAnalysis.Scripting.Hosting;
 using MySql.Data.MySqlClient;
 
@@ -22,6 +24,7 @@ public class Db
 
     public List<Request> GetRequests()
     {
+        List<ResponsiblesForRequest> rfr = GetResponsiblesForRequest();
         List<Request> requests = new List<Request>();
         string query = "select * from `Cоздание заявки` join Тип_неисправности Тн on `Cоздание заявки`.Неисправность = Тн.id join Статус_заявки Сз on Статус_Заявки = Сз.id";
         MySqlCommand command = new MySqlCommand(query, connection);
@@ -30,18 +33,33 @@ public class Db
         while (reader.Read())
         {
             int id = reader.GetInt32(0);
+            //MySqlCommand mCommand = new MySqlCommand("select * from Ответственный_За_Заявку where ID_заявки = @id;", connection);
+            //mCommand.Parameters.AddWithValue("@id", id);
+            //List<Responsible> rs = new List<Responsible>();
+            //MySqlDataReader mReader = mCommand.ExecuteReader();
+            //while (mReader.Read())
+            //{
+            //    rs.Add();
+            //}
+            List<ResponsiblesForRequest> crfr = rfr.Where(x => x.requestId == id).ToList();
+            List<string> rf = new List<string>();
+            foreach (var item in crfr)
+            {
+                rf.Add(MainWindowViewModel.responsibles.Where(x => x.id == item.id).Select(x => x.name).First());
+            }
             DateTime time = reader.GetDateTime(1);
             string equip = reader.GetString(2);
             string defect = reader.GetString(8);
             string problemDesc = reader.GetString(4);
             string client = reader.GetString(5);
             string status = reader.GetString(10);
-            requests.Add(new Request(id, time, equip, defect, problemDesc, client, status));
+            requests.Add(new Request(id, time, equip, defect, problemDesc, client, status, rf));
         }
 
         connection.Close();
         return requests;
     }
+    
     
     public List<Responsible> GetResponsibles()
     {
@@ -94,8 +112,20 @@ public class Db
         return defects;
     }
 
-    public List<ResponsiblesForRequest> GetResponsiblesForRequest(int id)
+    public List<ResponsiblesForRequest> GetResponsiblesForRequest()
     {
-        return null;
+        List<ResponsiblesForRequest> resps = new List<ResponsiblesForRequest>();
+        string query = "select * from Ответственный_За_Заявку";
+        MySqlCommand command = new MySqlCommand(query, connection);
+        connection.Open();
+        MySqlDataReader reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            resps.Add(new ResponsiblesForRequest(reader.GetInt32(0), reader.GetInt32(2), reader.GetInt32(1)));
+        }
+
+        connection.Close();
+        
+        return resps;
     }
 }

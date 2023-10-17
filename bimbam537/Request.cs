@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace bimbam537;
 
@@ -12,8 +13,11 @@ public class Request
     public string problemDesc { get; set; }
     public string client { get; set; }
     public string requestStatus { get; set; }
+
+    public List<string> responsibles;
     
-    public Request(int id, DateTime addDate, string equipment, string defectType, string problemDesc, string client, string requestStatus)
+    
+    public Request(int id, DateTime addDate, string equipment, string defectType, string problemDesc, string client, string requestStatus, List<string> reps)
     {
         this.id = id;
         this.addDate = addDate;
@@ -22,6 +26,7 @@ public class Request
         this.problemDesc = problemDesc;
         this.client = client;
         this.requestStatus = requestStatus;
+        responsibles = reps;
     }
 
 }
