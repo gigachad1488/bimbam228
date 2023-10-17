@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Styling;
+using bimbam537.ViewModels;
 using Brush = Avalonia.Media.Brush;
 using Brushes = Avalonia.Media.Brushes;
 using Color = Avalonia.Media.Color;
@@ -45,14 +47,19 @@ public void ThemeChanger(object? sender, RoutedEventArgs e)
     }
 }
 
+public void UpdateTables(object? sender, RoutedEventArgs e)
+{
+    MainWindowViewModel.UpdateCollections();
+}
+
     public void ChangeTheme(Theme theme)
     {
             TabsGrid.Background = new SolidColorBrush(theme.mainColor);
             FunctionsGrid.Background = new SolidColorBrush(theme.mainColor);
             DataGridPanel.Background = new SolidColorBrush(theme.mainColor);
-            DataGrid.Background = new SolidColorBrush(theme.secondaryColor);
-            DataGrid.Foreground = new SolidColorBrush(theme.textColor);
-            DataGrid.RowBackground = new SolidColorBrush(theme.secondaryColor);
+            dataGrid.Background = new SolidColorBrush(theme.secondaryColor);
+            dataGrid.Foreground = new SolidColorBrush(theme.textColor);
+            dataGrid.RowBackground = new SolidColorBrush(theme.secondaryColor);
             
             table1Button.Background = new SolidColorBrush(theme.elementsColor1);
             table1Button.Foreground = new SolidColorBrush(theme.textColor);
@@ -69,6 +76,8 @@ public void ThemeChanger(object? sender, RoutedEventArgs e)
             changeButton.Foreground = new SolidColorBrush(theme.textColor);
             deleteButton.Background = new SolidColorBrush(theme.elementsColor2);
             deleteButton.Foreground = new SolidColorBrush(theme.textColor);
+            updateButton.Background = new SolidColorBrush(theme.elementsColor2);
+            updateButton.Foreground = new SolidColorBrush(theme.textColor);
             themeButton.Background = new SolidColorBrush(theme.elementsColor2);
             themeButton.Foreground = new SolidColorBrush(theme.textColor);
     }
@@ -82,24 +91,32 @@ public void ThemeChanger(object? sender, RoutedEventArgs e)
                 table2Button.BorderBrush = Brushes.Transparent;
                 table3Button.BorderBrush = Brushes.Transparent;
                 table4Button.BorderBrush = Brushes.Transparent;
+                
+                dataGrid.ItemsSource = MainWindowViewModel.requests;
                 break;
             case 1:
                 table1Button.BorderBrush = Brushes.Transparent;
                 table2Button.BorderBrush = Brushes.Blue;
                 table3Button.BorderBrush = Brushes.Transparent;
                 table4Button.BorderBrush = Brushes.Transparent;
+
+                dataGrid.ItemsSource = MainWindowViewModel.statuses;
                 break;
             case 2:
                 table1Button.BorderBrush = Brushes.Transparent;
                 table2Button.BorderBrush = Brushes.Transparent;
                 table3Button.BorderBrush = Brushes.Blue;
                 table4Button.BorderBrush = Brushes.Transparent;
+
+                dataGrid.ItemsSource = MainWindowViewModel.defects;
                 break;
             case 3:
                 table1Button.BorderBrush = Brushes.Transparent;
                 table2Button.BorderBrush = Brushes.Transparent;
                 table3Button.BorderBrush = Brushes.Transparent;
                 table4Button.BorderBrush = Brushes.Blue;
+
+                dataGrid.ItemsSource = MainWindowViewModel.responsibles;
                 break;
         }
     }

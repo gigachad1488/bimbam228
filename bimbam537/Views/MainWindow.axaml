@@ -18,23 +18,22 @@
     </Design.DataContext>
     
     <Grid RowDefinitions="*, Auto" ColumnDefinitions="Auto, *" Background="Aquamarine">
-        <Grid x:Name="TabsGrid" Grid.Column="0" Grid.Row="0" Background="Azure" Width="135" RowDefinitions="*, *, *, *">
-            
-            <Button BorderThickness="5" x:Name="table1Button" Background="Aqua" VerticalAlignment="Stretch" Grid.Row="0" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">клиенты</TextBlock>
+        <Grid  x:Name="TabsGrid" Grid.Column="0" Grid.Row="0" RowDefinitions="*, *, *, *" Background="Black" Width="135" VerticalAlignment="Stretch">
+            <Button BorderThickness="5" x:Name="table1Button" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="80"  Grid.Row="0" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">заявки</TextBlock>
             </Button>
-            <Button BorderThickness="5" x:Name="table2Button" Background="Aqua" VerticalAlignment="Stretch" Grid.Row="1" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">заказы</TextBlock>
+            <Button BorderThickness="5" x:Name="table2Button" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="80"  Grid.Row="1" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">статусы</TextBlock>
             </Button>
-            <Button BorderThickness="5" x:Name="table3Button" Background="Aqua" VerticalAlignment="Stretch" Grid.Row="2" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">говно1</TextBlock>
+            <Button BorderThickness="5" x:Name="table3Button" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="80" Grid.Row="2" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">неисправности</TextBlock>
             </Button>
-            <Button BorderThickness="5" x:Name="table4Button" Background="Aqua" VerticalAlignment="Stretch" Grid.Row="3" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">говно2</TextBlock>
+            <Button BorderThickness="5" x:Name="table4Button" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="80" Grid.Row="3" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">ответственные</TextBlock>
             </Button>
         </Grid>
         <Grid Grid.Row="0" Column="1" RowDefinitions="Auto, *" Background="Beige">
-            <Grid x:Name="FunctionsGrid" Grid.Row="0" Height="50" ColumnDefinitions="*, *, *, *"  Background="Chartreuse">
+            <Grid x:Name="FunctionsGrid" Grid.Row="0" Height="50" ColumnDefinitions="*, *, *, *, *"  Background="Chartreuse">
                 <Button x:Name="addButton" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">Добавить</TextBlock>
                 </Button>
@@ -44,12 +43,15 @@
                 <Button x:Name="deleteButton" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">Удалить</TextBlock>
                 </Button>
-                <Button x:Name="themeButton" Click="ThemeChanger" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="80" Margin="0,5, 5, 5">
+                <Button Click="UpdateTables" x:Name="updateButton" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,5, 5, 5">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">Обновить</TextBlock>
+                </Button>
+                <Button x:Name="themeButton" Click="ThemeChanger" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="80" Margin="0,5, 5, 5">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">тема</TextBlock>
                 </Button>
             </Grid>
             <Grid x:Name="DataGridPanel" Grid.Row="1"  Background="Beige">
-                <DataGrid x:Name="DataGrid" GridLinesVisibility="All" HorizontalGridLinesBrush="Azure" VerticalGridLinesBrush="Azure" AutoGenerateColumns="True" x:CompileBindings="True" ItemsSource="{Binding asd}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Chocolate" Margin="5, 10, 5, 10">
+                <DataGrid IsReadOnly="True" x:Name="dataGrid" GridLinesVisibility="All" HorizontalGridLinesBrush="Azure" VerticalGridLinesBrush="Azure" AutoGenerateColumns="True" x:CompileBindings="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Chocolate" Margin="5, 10, 5, 10">
                 </DataGrid>
             </Grid>
         </Grid>
