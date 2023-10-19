@@ -20,9 +20,9 @@ namespace bimbam537.Views;
 public partial class MainWindow : Window
 {
     private bool isBlackTheme = false;
-    
 
-public MainWindow()
+
+    public MainWindow()
     {
         InitializeComponent();
         isBlackTheme = false;
@@ -31,57 +31,60 @@ public MainWindow()
         table2Button.Click += delegate { ChangeTable(1); };
         table3Button.Click += delegate { ChangeTable(2); };
         table4Button.Click += delegate { ChangeTable(3); };
-        
-        ChangeTable(0);
+        statsButton.Click += delegate { ChangeTable(4); };
+
+        //ChangeTable(0);
     }
 
-public void ThemeChanger(object? sender, RoutedEventArgs e)
-{
-    if (!isBlackTheme)
+    public void ThemeChanger(object? sender, RoutedEventArgs e)
     {
-        isBlackTheme = true;
-        ChangeTheme(new BlackTheme());
+        if (!isBlackTheme)
+        {
+            isBlackTheme = true;
+            ChangeTheme(new BlackTheme());
+        }
+        else
+        {
+            isBlackTheme = false;
+            ChangeTheme(new WhiteTheme());
+        }
     }
-    else
-    {
-        isBlackTheme = false;
-        ChangeTheme(new WhiteTheme());
-    }
-}
 
-public void UpdateTables(object? sender, RoutedEventArgs e)
-{
-    MainWindowViewModel.UpdateCollections();
-}
+    public void UpdateTables(object? sender, RoutedEventArgs e)
+    {
+        MainWindowViewModel.UpdateCollections();
+    }
 
     public void ChangeTheme(Theme theme)
     {
-            TabsGrid.Background = new SolidColorBrush(theme.mainColor);
-            FunctionsGrid.Background = new SolidColorBrush(theme.mainColor);
-            DataGridPanel.Background = new SolidColorBrush(theme.mainColor);
-            dataGrid.Background = new SolidColorBrush(theme.secondaryColor);
-            dataGrid.Foreground = new SolidColorBrush(theme.textColor);
-            dataGrid.RowBackground = new SolidColorBrush(theme.secondaryColor);
-            
-            table1Button.Background = new SolidColorBrush(theme.elementsColor1);
-            table1Button.Foreground = new SolidColorBrush(theme.textColor);
-            table2Button.Background = new SolidColorBrush(theme.elementsColor1);
-            table2Button.Foreground = new SolidColorBrush(theme.textColor);
-            table3Button.Background = new SolidColorBrush(theme.elementsColor1);
-            table3Button.Foreground = new SolidColorBrush(theme.textColor);
-            table4Button.Background = new SolidColorBrush(theme.elementsColor1);
-            table4Button.Foreground = new SolidColorBrush(theme.textColor);
-            
-            addButton.Background = new SolidColorBrush(theme.elementsColor2);
-            addButton.Foreground = new SolidColorBrush(theme.textColor);
-            changeButton.Background = new SolidColorBrush(theme.elementsColor2);
-            changeButton.Foreground = new SolidColorBrush(theme.textColor);
-            deleteButton.Background = new SolidColorBrush(theme.elementsColor2);
-            deleteButton.Foreground = new SolidColorBrush(theme.textColor);
-            updateButton.Background = new SolidColorBrush(theme.elementsColor2);
-            updateButton.Foreground = new SolidColorBrush(theme.textColor);
-            themeButton.Background = new SolidColorBrush(theme.elementsColor2);
-            themeButton.Foreground = new SolidColorBrush(theme.textColor);
+        TabsGrid.Background = new SolidColorBrush(theme.mainColor);
+        FunctionsGrid.Background = new SolidColorBrush(theme.mainColor);
+        DataGridPanel.Background = new SolidColorBrush(theme.mainColor);
+        dataGrid.Background = new SolidColorBrush(theme.secondaryColor);
+        dataGrid.Foreground = new SolidColorBrush(theme.textColor);
+        dataGrid.RowBackground = new SolidColorBrush(theme.secondaryColor);
+
+        table1Button.Background = new SolidColorBrush(theme.elementsColor1);
+        table1Button.Foreground = new SolidColorBrush(theme.textColor);
+        table2Button.Background = new SolidColorBrush(theme.elementsColor1);
+        table2Button.Foreground = new SolidColorBrush(theme.textColor);
+        table3Button.Background = new SolidColorBrush(theme.elementsColor1);
+        table3Button.Foreground = new SolidColorBrush(theme.textColor);
+        table4Button.Background = new SolidColorBrush(theme.elementsColor1);
+        table4Button.Foreground = new SolidColorBrush(theme.textColor);
+        statsButton.Background = new SolidColorBrush(theme.elementsColor1);
+        statsButton.Foreground = new SolidColorBrush(theme.textColor);
+
+        addButton.Background = new SolidColorBrush(theme.elementsColor2);
+        addButton.Foreground = new SolidColorBrush(theme.textColor);
+        changeButton.Background = new SolidColorBrush(theme.elementsColor2);
+        changeButton.Foreground = new SolidColorBrush(theme.textColor);
+        deleteButton.Background = new SolidColorBrush(theme.elementsColor2);
+        deleteButton.Foreground = new SolidColorBrush(theme.textColor);
+        updateButton.Background = new SolidColorBrush(theme.elementsColor2);
+        updateButton.Foreground = new SolidColorBrush(theme.textColor);
+        themeButton.Background = new SolidColorBrush(theme.elementsColor2);
+        themeButton.Foreground = new SolidColorBrush(theme.textColor);
     }
 
     public void ChangeTable(int id)
@@ -95,23 +98,14 @@ public void UpdateTables(object? sender, RoutedEventArgs e)
                 table4Button.BorderBrush = Brushes.Transparent;
 
                 dataGrid.ItemsSource = MainWindowViewModel.requests;
-                var col = new DataGridTemplateColumn();
-                col.Header = "Ответственные";
-                col.CellTemplate = new FuncDataTemplate<Object>((itemModel, nameScope) =>
-                {
-                    return new Avalonia.Controls.ComboBox
-                    {
-                        SelectedIndex = 0
-                    };
-                });
-                
-                dataGrid.Columns.Add(col);
                 break;
             case 1:
                 table1Button.BorderBrush = Brushes.Transparent;
                 table2Button.BorderBrush = Brushes.Blue;
                 table3Button.BorderBrush = Brushes.Transparent;
                 table4Button.BorderBrush = Brushes.Transparent;
+                statsButton.BorderBrush = Brushes.Transparent;
+                dataGrid.IsVisible = true;
 
                 dataGrid.ItemsSource = MainWindowViewModel.statuses;
                 break;
@@ -120,6 +114,8 @@ public void UpdateTables(object? sender, RoutedEventArgs e)
                 table2Button.BorderBrush = Brushes.Transparent;
                 table3Button.BorderBrush = Brushes.Blue;
                 table4Button.BorderBrush = Brushes.Transparent;
+                statsButton.BorderBrush = Brushes.Transparent;
+                dataGrid.IsVisible = true;
 
                 dataGrid.ItemsSource = MainWindowViewModel.defects;
                 break;
@@ -128,12 +124,24 @@ public void UpdateTables(object? sender, RoutedEventArgs e)
                 table2Button.BorderBrush = Brushes.Transparent;
                 table3Button.BorderBrush = Brushes.Transparent;
                 table4Button.BorderBrush = Brushes.Blue;
+                statsButton.BorderBrush = Brushes.Transparent;
+                dataGrid.IsVisible = true;
 
                 dataGrid.ItemsSource = MainWindowViewModel.responsibles;
                 break;
+            case 4:
+                table1Button.BorderBrush = Brushes.Transparent;
+                table2Button.BorderBrush = Brushes.Transparent;
+                table3Button.BorderBrush = Brushes.Transparent;
+                table4Button.BorderBrush = Brushes.Transparent;
+                statsButton.BorderBrush = Brushes.Blue;
+                completedText.Text = MainWindowViewModel.requests.Count(x => x.requestStatus == "Выполнено").ToString();
+
+                dataGrid.IsVisible = false;
+                break;
         }
     }
-    
+
 }
 
 public interface Theme
@@ -142,7 +150,7 @@ public interface Theme
     public Color secondaryColor { get; set; }
     public Color elementsColor1 { get; set; }
     public Color elementsColor2 { get; set; }
-    
+
     public Color textColor { get; set; }
 }
 

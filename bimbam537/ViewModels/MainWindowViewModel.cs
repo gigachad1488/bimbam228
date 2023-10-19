@@ -18,10 +18,10 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        requests.AddRange(MainWindowViewModel.db.GetRequests());
-        statuses.AddRange(db.GetStatuses());
-        defects.AddRange(db.GetDefects());
-        responsibles.AddRange(db.GetResponsibles());
+        //requests.AddRange(MainWindowViewModel.db.GetRequests());
+        //statuses.AddRange(db.GetStatuses());
+        //defects.AddRange(db.GetDefects());
+        //responsibles.AddRange(db.GetResponsibles());
     }
 
     public static void UpdateCollections()

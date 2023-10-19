@@ -18,19 +18,22 @@
     </Design.DataContext>
     
     <Grid RowDefinitions="*, Auto" ColumnDefinitions="Auto, *" Background="Aquamarine">
-        <Grid  x:Name="TabsGrid" Grid.Column="0" Grid.Row="0" RowDefinitions="*, *, *, *" Background="Black" Width="135" VerticalAlignment="Stretch">
+        <Grid  x:Name="TabsGrid" Grid.Column="0" Grid.Row="0" RowDefinitions="*, *, *, *, *" Background="Black" Width="135" VerticalAlignment="Stretch">
             <Button BorderThickness="5" x:Name="table1Button" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="80"  Grid.Row="0" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">заявки</TextBlock>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="11" FontWeight="Heavy">заявки</TextBlock>
             </Button>
             <Button BorderThickness="5" x:Name="table2Button" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="80"  Grid.Row="1" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">статусы</TextBlock>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="11" FontWeight="Heavy">статусы</TextBlock>
             </Button>
             <Button BorderThickness="5" x:Name="table3Button" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="80" Grid.Row="2" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">неисправности</TextBlock>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="11" FontWeight="Heavy">неисправности</TextBlock>
             </Button>
             <Button BorderThickness="5" x:Name="table4Button" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="80" Grid.Row="3" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">ответственные</TextBlock>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="11" FontWeight="Heavy">ответственные</TextBlock>
             </Button>
+			<Button BorderThickness="5" x:Name="statsButton" Background="Aqua" VerticalAlignment="Stretch" MaxHeight="100" Grid.Row="4" HorizontalAlignment="Stretch" Margin="10, 20, 10, 20">
+				<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="11" FontWeight="Heavy">статистика</TextBlock>
+			</Button>
         </Grid>
         <Grid Grid.Row="0" Column="1" RowDefinitions="Auto, *" Background="Beige">
             <Grid x:Name="FunctionsGrid" Grid.Row="0" Height="50" ColumnDefinitions="*, *, *, *, *"  Background="Chartreuse">
@@ -50,9 +53,19 @@
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Heavy">тема</TextBlock>
                 </Button>
             </Grid>
-            <Grid x:Name="DataGridPanel" Grid.Row="1"  Background="Beige">
-                <DataGrid IsReadOnly="True" x:Name="dataGrid" GridLinesVisibility="All" HorizontalGridLinesBrush="Azure" VerticalGridLinesBrush="Azure" AutoGenerateColumns="True" x:CompileBindings="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Chocolate" Margin="5, 10, 5, 10">
-                </DataGrid>
+            <Grid x:Name="DataGridPanel" Grid.Row="1"  Background="Beige">       
+				<Grid Background="Aquamarine" RowDefinitions="*, *">
+					<WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
+						<TextBlock FontSize="30">выполненые заявки: </TextBlock>
+						<TextBlock x:Name="completedText" FontSize="30">45345</TextBlock>
+					</WrapPanel>
+					<WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+						<TextBlock FontSize="30">среднее2: </TextBlock>
+						<TextBlock FontSize="30">45345: </TextBlock>
+					</WrapPanel>
+				</Grid>
+				<DataGrid IsReadOnly="True" x:Name="dataGrid" GridLinesVisibility="All" HorizontalGridLinesBrush="Azure" VerticalGridLinesBrush="Azure" AutoGenerateColumns="True" x:CompileBindings="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Chocolate" Margin="5, 10, 5, 10">
+				</DataGrid>
             </Grid>
         </Grid>
     </Grid>
